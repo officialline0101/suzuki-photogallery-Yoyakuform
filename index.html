@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,14 @@
     <style>
         /* 右端の細いナビ（固定） */
         .side-nav {
-            position: fixed; /* 画面スクロールしても固定 */
-            right: -5px; /* さらに右へ */
-            top: 80%; /* 画面中央に固定 */
-            transform: translateY(-50%) translateX(13px); /* 中央配置と右ずらし */
+            position: fixed;
+            /* 画面スクロールしても固定 */
+            right: -5px;
+            /* さらに右へ */
+            top: 80%;
+            /* 画面中央に固定 */
+            transform: translateY(-50%) translateX(16px);
+            /* 中央配置と右ずらし */
             background: #bbaf87;
             display: flex;
             flex-direction: column;
@@ -19,11 +24,13 @@
             padding: 4px;
             border-radius: 10px 0 0 10px;
             z-index: 1000;
-            width: 35px; /* さらに細く */
+            width: 35px;
+            /* さらに細く */
         }
 
         .side-nav a:active {
-            transform: scale(1.0); /* タップした後に元のサイズに戻す */
+            transform: scale(1.0);
+            /* タップした後に元のサイズに戻す */
         }
 
         .side-nav a {
@@ -44,17 +51,22 @@
         }
 
         .side-nav a span {
-            font-size: 24px; /* 矢印をさらに大きく */
+            font-size: 24px;
+            /* 矢印をさらに大きく */
             position: absolute;
-            left: -0px; /* 左端に寄せる */
-            top: 13px; /* さらに下へ */
+            left: -0px;
+            /* 左端に寄せる */
+            top: 13px;
+            /* さらに下へ */
         }
 
         /* スマホ用の微調整 */
         @media (max-width: 600px) {
             .side-nav {
-                right: 2px; /* スマホではさらに右端に */
-                width: 30px; /* もっと細く */
+                right: 2px;
+                /* スマホではさらに右端に */
+                width: 30px;
+                /* もっと細く */
             }
 
             .side-nav a {
@@ -63,10 +75,11 @@
             }
 
             .side-nav a i {
-                font-size: 12px; /* スマホではもっと小さく */
+                font-size: 12px;
+                /* スマホではもっと小さく */
             }
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #e7e7e7;
@@ -83,7 +96,7 @@
             background-color: #fdfdfd;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 96%;
             max-width: 500px;
             padding: 25px;
             box-sizing: border-box;
@@ -545,21 +558,24 @@
         }
 
         .edit-button {
-    background-color: #bbaf87;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    white-space: nowrap; /* 改行を防ぐ */
-    width: 80px; /* 横幅を固定 */
-    text-align: center; /* テキストを中央揃え */
-}
+            background-color: #bbaf87;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            /* 改行を防ぐ */
+            width: 80px;
+            /* 横幅を固定 */
+            text-align: center;
+            /* テキストを中央揃え */
+        }
 
-.edit-button:hover {
-    background-color: #bbaf87;
-}
+        .edit-button:hover {
+            background-color: #bbaf87;
+        }
 
 
         /* 100点の予約フォームCSS */
@@ -657,98 +673,98 @@
             /* 影も控えめに */
         }
 
-    /* ナビゲーションバー */
-    .sidebar {
-        position: fixed;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        background: #1e1e2d;
-        padding: 10px;
-        border-radius: 10px 0 0 10px;
-        z-index: 1000;
-    }
+        /* ナビゲーションバー */
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e1e2d;
+            padding: 10px;
+            border-radius: 10px 0 0 10px;
+            z-index: 1000;
+        }
 
-    .sidebar a {
-        display: block;
-        padding: 15px;
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        font-size: 14px;
-        margin-bottom: 10px;
-        background: #bbaf87;
-        border-radius: 5px;
-        transition: background 0.3s;
-    }
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+            background: #bbaf87;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
 
-    .sidebar a:hover {
-        background: #bbaf87;
-    }
+        .sidebar a:hover {
+            background: #bbaf87;
+        }
 
-    /* スクロール用のセクション */
-    .section {
-        padding: 50px 10px;
-        margin-top: 30px;
-    }
+        /* スクロール用のセクション */
+        .section {
+            padding: 50px 10px;
+            margin-top: 30px;
+        }
 
-.datetime-wrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-}
+        .datetime-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-.datetime-placeholder {
-    position: absolute;
-    top: 50%;
-    left: 16px;
-    transform: translateY(-50%);
-    color: #999;
-    font-size: 1rem;
-    pointer-events: none;
-    transition: all 0.2s ease;
-    background-color: #fff;
-    padding: 0 6px;
-}
+        .datetime-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            background-color: #fff;
+            padding: 0 6px;
+        }
 
-.datetime-input {
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    background-color: #fff;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    appearance: none; /* iOSのズーム防止 */
-}
+        .datetime-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #fff;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            appearance: none;
+            /* iOSのズーム防止 */
+        }
 
-.datetime-input:focus {
-    border-color: #007BFF;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-    outline: none;
-}
+        .datetime-input:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
 
-/* 入力中・フォーカス時にプレースホルダーを非表示 */
-.datetime-input:focus + .datetime-placeholder,
-.datetime-input:not(:placeholder-shown) + .datetime-placeholder {
-    opacity: 0;
-    visibility: hidden;
-}
+        /* 入力中・フォーカス時にプレースホルダーを非表示 */
+        .datetime-input:focus+.datetime-placeholder,
+        .datetime-input:not(:placeholder-shown)+.datetime-placeholder {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-/* スマホ画面でフォントサイズなどを最適化 */
-@media (max-width: 600px) {
-    .datetime-input {
-        font-size: 1.1rem;
-        padding: 1.2rem;
-    }
+        /* スマホ画面でフォントサイズなどを最適化 */
+        @media (max-width: 600px) {
+            .datetime-input {
+                font-size: 1.1rem;
+                padding: 1.2rem;
+            }
 
-    .datetime-placeholder {
-        font-size: 0.95rem;
-        left: 14px;
-    }
-}
-
+            .datetime-placeholder {
+                font-size: 0.95rem;
+                left: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -778,9 +794,13 @@
 
         <div class="label">メニュー<span class="required">必須</span></div>
         <div class="yoyaku-buttons">
-            <button type="button" id="firstYoyaku" onclick="selectYoyaku(this)">スタジオ予約60分</button>
-            <button type="button" id="repeatYoyaku" onclick="selectYoyaku(this)">ロケ予約60分</button>
-            <button type="button" id="sanYoyaku" onclick="selectYoyaku(this)">証明写真予約10分</button>
+            <button type="button" id="menu1" onclick="selectYoyaku(this)">七五三撮影</button>
+            <button type="button" id="menu2" onclick="selectYoyaku(this)">成人式撮影</button>
+            <button type="button" id="menu3" onclick="selectYoyaku(this)">お宮参り撮影</button>
+            <button type="button" id="menu4" onclick="selectYoyaku(this)">家族写真撮影</button>
+            <button type="button" id="menu5" onclick="selectYoyaku(this)">卒業入学撮影</button>
+            <button type="button" id="menu6" onclick="selectYoyaku(this)">マタニティー・ニューボーン撮影</button>
+            <button type="button" id="menu7" onclick="selectYoyaku(this)">ロケーション撮影</button>
         </div>
 
         <div class="highlight-background">
@@ -924,9 +944,9 @@
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const visitCountText = visitCount ? `<span style="color:#bbaf87;"><strong>【ご来店回数】</strong></span><br>・${visitCount}` : '・来店回数が未選択です';
-const yoyakuCountText = Array.isArray(yoyakuCount) && yoyakuCount.length > 0
-    ? `<span style="color:#bbaf87;"><strong>【メニュー】</strong></span><br>` + yoyakuCount.map(item => `・${item}`).join('<br>')
-    : '・メニューが未選択です';
+            const yoyakuCountText = Array.isArray(yoyakuCount) && yoyakuCount.length > 0
+                ? `<span style="color:#bbaf87;"><strong>【メニュー】</strong></span><br>` + yoyakuCount.map(item => `・${item}`).join('<br>')
+                : '・メニューが未選択です';
 
 
             // 第1希望日が選択された場合の表示
@@ -1103,33 +1123,33 @@ const yoyakuCountText = Array.isArray(yoyakuCount) && yoyakuCount.length > 0
             fetchAvailability(currentDate);
         }
 
-function selectYoyaku(element) {
-    const value = element.innerText;
+        function selectYoyaku(element) {
+            const value = element.innerText;
 
-    // 選択済みかどうかをチェック
-    const index = yoyakuCount.indexOf(value);
+            // 選択済みかどうかをチェック
+            const index = yoyakuCount.indexOf(value);
 
-    if (index > -1) {
-        // すでに選択されていたら解除
-        yoyakuCount.splice(index, 1);
-        element.classList.remove('active');
-    } else {
-        // 選択されていなければ追加
-        yoyakuCount.push(value);
-        element.classList.add('active');
-    }
+            if (index > -1) {
+                // すでに選択されていたら解除
+                yoyakuCount.splice(index, 1);
+                element.classList.remove('active');
+            } else {
+                // 選択されていなければ追加
+                yoyakuCount.push(value);
+                element.classList.add('active');
+            }
 
-    // 選択されたすべての訪問回数に対応する時間を合計する（必要であれば）
-    let totalSelectedTime = 0;
-    for (const count of yoyakuCount) {
-        if (yoyakuTimes[count]) {
-            totalSelectedTime += yoyakuTimes[count];
+            // 選択されたすべての訪問回数に対応する時間を合計する（必要であれば）
+            let totalSelectedTime = 0;
+            for (const count of yoyakuCount) {
+                if (yoyakuTimes[count]) {
+                    totalSelectedTime += yoyakuTimes[count];
+                }
+            }
+            selectedYoyakuTime = totalSelectedTime;
+
+            fetchAvailability(currentDate);
         }
-    }
-    selectedYoyakuTime = totalSelectedTime;
-
-    fetchAvailability(currentDate);
-}
 
         function selectDate(cell) {
             // "unavailable" クラスが付いている場合はクリックを無効化
@@ -1156,60 +1176,82 @@ function selectYoyaku(element) {
             updateDisplayInfo();
         }
 
-function submitForm() {
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            visitCount: visitCount,
-            yoyakuCount: yoyakuCount,
-            dates: [
-                document.getElementById('date1').value,
-                document.getElementById('date2').value,
-                document.getElementById('date3').value
-            ],
-            message: document.getElementById('message').value.trim()
-        };
+        function submitForm() {
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                visitCount: visitCount,
+                yoyakuCount: yoyakuCount,
+                dates: [
+                    document.getElementById('date1').value,
+                    document.getElementById('date2').value,
+                    document.getElementById('date3').value
+                ],
+                message: document.getElementById('message').value.trim()
+            };
 
-    // フォームデータのチェック
-    if (!formData.name) {
-        alert('お名前を入力してください。');
-        return;
-    }
+            // フォームデータのチェック
+            if (!formData.name) {
+                alert('お名前を入力してください。');
+                return;
+            }
 
-    if (!formData.phone) {
-        alert('電話番号を入力してください。');
-        return;
-    }
+            if (!formData.phone) {
+                alert('電話番号を入力してください。');
+                return;
+            }
 
-    if (!formData.yoyakuCount) {
-        alert('メニューを入力してください。');
-        return;
-    }
+            if (!formData.yoyakuCount) {
+                alert('メニューを入力してください。');
+                return;
+            }
 
-    if (!formData.dates[0]) {
-        alert('第1希望日を入力してください。');
-        return;
-    }
+            if (!formData.dates[0]) {
+                alert('第1希望日を入力してください。');
+                return;
+            }
 
-    if (!formData.dates[1]) {
-        alert('第2希望日を入力してください。');
-        return;
-    }
+            if (!formData.dates[1]) {
+                alert('第2希望日を入力してください。');
+                return;
+            }
 
-        // LINEトークにメッセージを送信
-        liff.sendMessages([{
-            type: 'text',
-            text: `【予約フォーム】\n≪お名前≫\n${formData.name}\n\n≪電話番号≫\n${formData.phone}\n\n≪ご来店回数≫\n${formData.visitCount}\n\n≪メニュー≫\n${Array.isArray(formData.yoyakuCount) ? formData.yoyakuCount.join('\n') : formData.yoyakuCount}\n\n【希望日時】\n≪第一希望日≫\n${formatDate(formData.dates[0])}\n\n≪第二希望日≫\n${formatDate(formData.dates[1])}\n\n≪第三希望日≫\n${formatDate(formData.dates[2])}\n\n≪メッセージ≫\n${formData.message}`
-        }]).then(() => {
-            /* メッセージ送信成功時の処理 */
-            alert('当日キャンセルは無いようにお願いいたします。');
-            /* LIFFウィンドウを閉じる */
-            liff.closeWindow();
-        }).catch((err) => {
-            /* メッセージ送信失敗時の処理 */
-            console.error('メッセージの送信に失敗しました', err);
-        });
-    }
+            const messageText = `【 ご予約内容 】
+
+👤 お名前：
+${formData.name} 様
+
+📞 電話番号：
+${formData.phone}
+
+🔄 ご来店回数：
+${formData.visitCount}
+
+📋 メニュー：
+${Array.isArray(formData.yoyakuCount) ? formData.yoyakuCount.map(m => '・' + m).join('\\n') : '・' + formData.yoyakuCount}
+
+📅 ご希望日時：
+① ${formData.dates[0] ? formatDate(formData.dates[0]) : 'なし'}
+② ${formData.dates[1] ? formatDate(formData.dates[1]) : 'なし'}
+③ ${formData.dates[2] ? formatDate(formData.dates[2]) : 'なし'}
+
+📝 メッセージ：
+${formData.message || '特になし'}`;
+
+            // LINEトークにメッセージを送信
+            liff.sendMessages([{
+                type: 'text',
+                text: messageText
+            }]).then(() => {
+                /* メッセージ送信成功時の処理 */
+                alert('当日キャンセルは無いようにお願いいたします。');
+                /* LIFFウィンドウを閉じる */
+                liff.closeWindow();
+            }).catch((err) => {
+                /* メッセージ送信失敗時の処理 */
+                console.error('メッセージの送信に失敗しました', err);
+            });
+        }
 
         function formatDate(dateStr) {
             if (!dateStr) return '';
@@ -1328,29 +1370,29 @@ function submitForm() {
                     }
 
                     const slotStart = new Date(day);
-slotStart.setHours(parseInt(times[j].split(':')[0]), parseInt(times[j].split(':')[1]), 0, 0);
+                    slotStart.setHours(parseInt(times[j].split(':')[0]), parseInt(times[j].split(':')[1]), 0, 0);
 
-let slotEnd = new Date(slotStart);
-let menuDuration = selectedMenuTime || 10;
-let visitDuration = selectedVisitTime || 0;
-let irradiationsDuration = selectedirradiationsTime || 0;
+                    let slotEnd = new Date(slotStart);
+                    let menuDuration = selectedMenuTime || 10;
+                    let visitDuration = selectedVisitTime || 0;
+                    let irradiationsDuration = selectedirradiationsTime || 0;
 
-// 仮に終了時間を計算
-slotEnd.setMinutes(slotStart.getMinutes() + menuDuration + visitDuration + irradiationsDuration);
+                    // 仮に終了時間を計算
+                    slotEnd.setMinutes(slotStart.getMinutes() + menuDuration + visitDuration + irradiationsDuration);
 
-// ==== ここから営業日専用制御 ====
-if (businessEventTimes.length > 0) {
-  const isFullyInsideBusinessEvent = businessEventTimes.some(event => {
-    return slotStart >= event.start && slotEnd <= event.end;
-  });
+                    // ==== ここから営業日専用制御 ====
+                    if (businessEventTimes.length > 0) {
+                        const isFullyInsideBusinessEvent = businessEventTimes.some(event => {
+                            return slotStart >= event.start && slotEnd <= event.end;
+                        });
 
-  // 営業日イベントがある日で、時間がイベント外なら × にする
-  if (!isFullyInsideBusinessEvent) {
-    cell.textContent = '✕';
-    cell.classList.add('unavailable');
-    continue;
-  }
-}
+                        // 営業日イベントがある日で、時間がイベント外なら × にする
+                        if (!isFullyInsideBusinessEvent) {
+                            cell.textContent = '✕';
+                            cell.classList.add('unavailable');
+                            continue;
+                        }
+                    }
 
                     // 終了時間が翌日 (0時以降) になる場合は✕に設定
                     if (slotEnd.getDate() !== slotStart.getDate()) {
