@@ -186,7 +186,6 @@
         }
 
         .visit-buttons,
-        .yoyaku-buttons,
         .symptoms,
         .menu-sections,
         .irradiations {
@@ -196,8 +195,15 @@
             margin-bottom: 20px;
         }
 
+        /* メニューボタンは縦並び・全幅でタップしやすく */
+        .yoyaku-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
         .visit-buttons button,
-        .yoyaku-buttons button,
         .symptoms button,
         .menu-sections button,
         .irradiations button {
@@ -210,6 +216,20 @@
             box-sizing: border-box;
             text-align: center;
             white-space: nowrap;
+        }
+
+        /* メニューボタンのスタイル */
+        .yoyaku-buttons button {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f7f7f7;
+            cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 15px;
+            transition: all 0.2s;
         }
 
         .visit-buttons button.active,
@@ -729,41 +749,44 @@
 
         .datetime-input {
             width: 100%;
-            padding: 1rem;
-            font-size: 1rem;
+            padding: 18px;
+            font-size: 18px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 8px;
             box-sizing: border-box;
             background-color: #fff;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            color: #333;
             appearance: none;
-            /* iOSのズーム防止 */
+            touch-action: manipulation;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .datetime-input:focus {
-            border-color: #007BFF;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            border-color: #bbaf87;
+            box-shadow: 0 0 0 4px rgba(187, 175, 135, 0.2);
             outline: none;
         }
 
-        /* 入力中・フォーカス時にプレースホルダーを非表示 */
-        .datetime-input:focus+.datetime-placeholder,
-        .datetime-input:not(:placeholder-shown)+.datetime-placeholder {
-            opacity: 0;
-            visibility: hidden;
+        /* 日付・時間の横並び */
+        .dt-grid {
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
 
-        /* スマホ画面でフォントサイズなどを最適化 */
-        @media (max-width: 600px) {
-            .datetime-input {
-                font-size: 1.1rem;
-                padding: 1.2rem;
-            }
+        .dt-grid .datetime-input {
+            flex: 1 1 50%;
+        }
 
-            .datetime-placeholder {
-                font-size: 0.95rem;
-                left: 14px;
+        @media (max-width: 480px) {
+            .dt-grid {
+                flex-direction: column;
             }
+        }
+
+        .time-disabled {
+            opacity: 0.5;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -801,39 +824,45 @@
             <button type="button" id="menu5" onclick="selectYoyaku(this)">卒業入学撮影</button>
             <button type="button" id="menu6" onclick="selectYoyaku(this)">マタニティー・ニューボーン撮影</button>
             <button type="button" id="menu7" onclick="selectYoyaku(this)">ロケーション撮影</button>
+            <button type="button" id="menu8" onclick="selectYoyaku(this)">証明写真</button>
+            <button type="button" id="menu9" onclick="selectYoyaku(this)">その他</button>
+        </div>
+        <!-- その他を選択した場合の自由記載欄 -->
+        <div id="otherMenuArea" style="display: none; margin-bottom: 20px;">
+            <textarea id="otherMenuText" rows="3" placeholder="ご希望の内容をご記入ください" oninput="updateDisplayInfo()"></textarea>
         </div>
 
-        <div class="highlight-background">
-            <div class="label">第1希望日<span class="required">必須</span></div>
-        </div>
-
-        <!-- カスタム placeholder 表示用 -->
+        <!-- 第1希望日 -->
+        <div class="label" id="kibou1">第1希望日<span class="required">必須</span></div>
         <div class="datetime-wrapper" style="text-align: center;">
             <span class="placeholder" id="placeholder1">⇩タップして日時を入力⇩</span>
-            <input type="datetime-local" id="date1" class="datetime-input" placeholder=" " aria-label="タップして日時を入力">
-            <span class="datetime-placeholder">タップして日時を入力</span>
+            <input type="hidden" id="date1" name="date1">
+            <div class="dt-grid">
+                <select id="date1_day" class="datetime-input" aria-label="日付を選択"></select>
+                <select id="date1_time" class="datetime-input" aria-label="時間を選択"></select>
+            </div>
         </div>
 
-        <div class="highlight-background">
-            <span class="highlight-text">第2希望日<span class="required">必須</span></span>
-        </div>
-
-        <!-- カスタム placeholder 表示用 -->
+        <!-- 第2希望日 -->
+        <div class="label" id="kibou2">第2希望日<span class="required">必須</span></div>
         <div class="datetime-wrapper" style="text-align: center;">
             <span class="placeholder" id="placeholder2">⇩タップして日時を入力⇩</span>
-            <input type="datetime-local" id="date2" class="datetime-input" placeholder=" " aria-label="タップして日時を入力">
-            <span class="datetime-placeholder">タップして日時を入力</span>
+            <input type="hidden" id="date2" name="date2">
+            <div class="dt-grid">
+                <select id="date2_day" class="datetime-input" aria-label="日付を選択"></select>
+                <select id="date2_time" class="datetime-input" aria-label="時間を選択"></select>
+            </div>
         </div>
 
-        <div class="highlight-background">
-            <span class="highlight-text">第3希望日※任意</span>
-        </div>
-
-        <!-- カスタム placeholder 表示用 -->
+        <!-- 第3希望日（任意） -->
+        <div class="label" id="kibou3">第3希望日※任意</div>
         <div class="datetime-wrapper" style="text-align: center;">
             <span class="placeholder" id="placeholder3">⇩タップして日時を入力⇩</span>
-            <input type="datetime-local" id="date3" class="datetime-input" placeholder=" " aria-label="タップして日時を入力">
-            <span class="datetime-placeholder">タップして日時を入力</span>
+            <input type="hidden" id="date3" name="date3">
+            <div class="dt-grid">
+                <select id="date3_day" class="datetime-input" aria-label="日付を選択"></select>
+                <select id="date3_time" class="datetime-input" aria-label="時間を選択"></select>
+            </div>
         </div>
 
         <div class="labelContent">メッセージ<br>（質問等お気軽にご記入ください）</div>
@@ -848,7 +877,7 @@
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
         let visitCount = '';
-        let yoyakuCount = [];
+        let yoyakuCount = '';
         let selectedMenu = '';
         let selectedSymptom = [];  // 配列として定義
         let selectedFullDate = '';
@@ -924,29 +953,37 @@
             });
         });
 
+        // ISO文字列（YYYY-MM-DDTHH:MM）を日本語表示に変換
         function formatDateTime(dateTimeString) {
-            const date = new Date(dateTimeString);
+            if (!dateTimeString) return '無効な日時です';
+            const [dPart, tPart] = dateTimeString.split('T');
+            if (!dPart || !tPart) return '無効な日時です';
 
-            if (isNaN(date)) {
-                return '無効な日時です'; // 無効な日付の場合のエラーメッセージ
+            const [year, month, day] = dPart.split('-').map(n => parseInt(n, 10));
+            const [hours, minutes] = tPart.split(':').map(n => parseInt(n, 10));
+
+            if ([year, month, day, hours, minutes].some(n => Number.isNaN(n))) {
+                return '無効な日時です';
             }
-
-            const year = date.getFullYear();
-            const month = date.getMonth() + 1; // 月は0から始まるため+1
-            const day = date.getDate();
-            const hours = date.getHours();
-            const minutes = String(date.getMinutes()).padStart(2, '0'); // 分を2桁に整形
-
-            return `${year}年${month}月${day}日　${hours}時${minutes}分`;
+            return `${year}年${month}月${day}日　${hours}時${String(minutes).padStart(2, '0')}分`;
         }
 
         function updateDisplayInfo() {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const visitCountText = visitCount ? `<span style="color:#bbaf87;"><strong>【ご来店回数】</strong></span><br>・${visitCount}` : '・来店回数が未選択です';
-            const yoyakuCountText = Array.isArray(yoyakuCount) && yoyakuCount.length > 0
-                ? `<span style="color:#bbaf87;"><strong>【メニュー】</strong></span><br>` + yoyakuCount.map(item => `・${item}`).join('<br>')
-                : '・メニューが未選択です';
+            // 「その他」の場合は自由記載の内容も表示
+            let yoyakuCountText = '・メニューが未選択です';
+            if (yoyakuCount) {
+                let menuDisplay = `<span style="color:#bbaf87;"><strong>【メニュー】</strong></span><br>・${yoyakuCount}`;
+                if (yoyakuCount === 'その他') {
+                    const otherText = document.getElementById('otherMenuText').value.trim();
+                    if (otherText) {
+                        menuDisplay += `<br>　${otherText}`;
+                    }
+                }
+                yoyakuCountText = menuDisplay;
+            }
 
 
             // 第1希望日が選択された場合の表示
@@ -1031,10 +1068,145 @@
             button.addEventListener('click', updateDisplayInfo);
         });
 
-        // 第一希望日、第二希望日、第三希望日でupdateDisplayInfoを呼び出す
-        document.getElementById('date1').addEventListener('change', updateDisplayInfo);
-        document.getElementById('date2').addEventListener('change', updateDisplayInfo);
-        document.getElementById('date3').addEventListener('change', updateDisplayInfo);
+        // プルダウン日付選択の関数群
+        const JP_WD = ['日', '月', '火', '水', '木', '金', '土'];
+        const pad = n => String(n).padStart(2, '0');
+
+        // 日付セレクト：今日からdays日分の候補を作る（火曜日は除外）
+        function buildDateOptions(selectEl, days = 120, startDate = new Date()) {
+            const d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+            selectEl.innerHTML = '<option value="" disabled selected>日付を選択</option>';
+
+            for (let i = 0; i < days; i++) {
+                const wd = d.getDay();
+
+                // ★火曜(2)はスキップ（営業時間外）
+                if (wd !== 2) {
+                    const y = d.getFullYear();
+                    const m = pad(d.getMonth() + 1);
+                    const day = pad(d.getDate());
+                    const value = `${y}-${m}-${day}`;
+                    const label = `${y}/${m}/${day}（${JP_WD[wd]}）`;
+
+                    const opt = document.createElement('option');
+                    opt.value = value;
+                    opt.textContent = label;
+                    selectEl.appendChild(opt);
+                }
+
+                d.setDate(d.getDate() + 1);
+            }
+        }
+
+        // 曜日ごとの営業時間設定（0=日曜, 6=土曜）※火曜は定休日
+        const WEEKLY_HOURS = {
+            0: { start: 10, end: 18 },  // 日曜 10:00〜18:00
+            1: { start: 10, end: 18 },  // 月曜 10:00〜18:00
+            // 2: 火曜は営業時間外（日付候補に出さない）
+            3: { start: 10, end: 18 },  // 水曜 10:00〜18:00
+            4: { start: 10, end: 18 },  // 木曜 10:00〜18:00
+            5: { start: 10, end: 18 },  // 金曜 10:00〜18:00
+            6: { start: 10, end: 18 }   // 土曜 10:00〜18:00
+        };
+
+        // 時間セレクト生成（30分刻み）
+        function buildHalfHourOptions(selectEl, weekday) {
+            selectEl.innerHTML = '<option value="" disabled selected>時間を選択</option>';
+
+            // 火曜日は営業時間外なので時間を出さない
+            if (weekday === 2) return;
+
+            const { start, end } = WEEKLY_HOURS[weekday] || { start: 10, end: 18 };
+
+            for (let h = start; h <= end; h++) {
+                for (const m of [0, 30]) {
+                    // 最終時間の:30は除外（例：18:30を出さない）
+                    if (h === end && m === 30) continue;
+                    const hh = pad(h);
+                    const mm = pad(m);
+                    const opt = document.createElement('option');
+                    opt.value = `${hh}:${mm}`;
+                    opt.textContent = `${hh}:${mm}`;
+                    selectEl.appendChild(opt);
+                }
+            }
+        }
+
+        // hidden inputとplaceholderを更新
+        function updateHiddenAndPlaceholder(baseId) {
+            const day = document.getElementById(`${baseId}_day`).value;
+            const time = document.getElementById(`${baseId}_time`).value;
+            const hidden = document.getElementById(baseId);
+            const ph = document.getElementById(`placeholder${baseId.slice(-1)}`);
+
+            hidden.value = day && time ? `${day}T${time}` : "";
+
+            if (ph) ph.style.display = hidden.value ? 'none' : '';
+
+            // 表示パネルを即更新
+            if (typeof updateDisplayInfo === 'function') updateDisplayInfo();
+        }
+
+        // 既存のhiddenの値をselectに復元
+        function restoreIfAny(baseId) {
+            const hidden = document.getElementById(baseId);
+            if (!hidden.value) return;
+            const [d, t] = hidden.value.split('T');
+            const daySel = document.getElementById(`${baseId}_day`);
+            const timeSel = document.getElementById(`${baseId}_time`);
+
+            if (d && ![...daySel.options].some(o => o.value === d)) {
+                const tmp = document.createElement('option');
+                tmp.value = d; tmp.textContent = d.replaceAll('-', '/') + '（選択日）';
+                daySel.insertBefore(tmp, daySel.options[1]);
+            }
+            if (d) daySel.value = d;
+
+            if (t) {
+                const t5 = t.slice(0, 5);
+                if (d) {
+                    const wd = new Date(d).getDay();
+                    buildHalfHourOptions(timeSel, wd);
+                }
+                if ([...timeSel.options].some(o => o.value === t5)) {
+                    timeSel.value = t5;
+                }
+            }
+        }
+
+        // 各プルダウンの初期化
+        function initPicker(baseId, dateDays = 120) {
+            const daySel = document.getElementById(`${baseId}_day`);
+            const timeSel = document.getElementById(`${baseId}_time`);
+
+            buildDateOptions(daySel, dateDays);
+
+            // 初期状態：日付未選択なので時間はグレー
+            timeSel.innerHTML = '<option value="" selected hidden>時間を選択</option>';
+            timeSel.classList.add('time-disabled');
+
+            daySel.addEventListener('change', () => {
+                const dateVal = daySel.value;
+                if (dateVal) {
+                    const d = new Date(dateVal);
+                    const wd = d.getDay();
+                    buildHalfHourOptions(timeSel, wd);
+                    timeSel.classList.remove('time-disabled');
+                } else {
+                    timeSel.innerHTML = '<option value="" selected hidden>時間を選択</option>';
+                    timeSel.classList.add('time-disabled');
+                }
+                updateHiddenAndPlaceholder(baseId);
+            });
+
+            restoreIfAny(baseId);
+
+            timeSel.addEventListener('change', () => updateHiddenAndPlaceholder(baseId));
+            updateHiddenAndPlaceholder(baseId);
+        }
+
+        // 3つ分を初期化
+        ['date1', 'date2', 'date3'].forEach(id => initPicker(id, 120));
 
         document.querySelectorAll('.symptoms button').forEach(button => {
             button.addEventListener('click', () => {
@@ -1126,29 +1298,30 @@
         function selectYoyaku(element) {
             const value = element.innerText;
 
-            // 選択済みかどうかをチェック
-            const index = yoyakuCount.indexOf(value);
+            // 全メニューボタンのactiveを解除（単一選択）
+            const allButtons = document.querySelectorAll('.yoyaku-buttons button');
+            allButtons.forEach(btn => btn.classList.remove('active'));
 
-            if (index > -1) {
-                // すでに選択されていたら解除
-                yoyakuCount.splice(index, 1);
-                element.classList.remove('active');
+            if (yoyakuCount === value) {
+                // 同じボタンを再度押した場合は選択解除
+                yoyakuCount = '';
             } else {
-                // 選択されていなければ追加
-                yoyakuCount.push(value);
+                // 新しいメニューを選択
+                yoyakuCount = value;
                 element.classList.add('active');
             }
 
-            // 選択されたすべての訪問回数に対応する時間を合計する（必要であれば）
-            let totalSelectedTime = 0;
-            for (const count of yoyakuCount) {
-                if (yoyakuTimes[count]) {
-                    totalSelectedTime += yoyakuTimes[count];
-                }
+            // 「その他」の自由記載欄の表示/非表示を切り替え
+            const otherArea = document.getElementById('otherMenuArea');
+            if (yoyakuCount === 'その他') {
+                otherArea.style.display = 'block';
+            } else {
+                otherArea.style.display = 'none';
+                document.getElementById('otherMenuText').value = '';
             }
-            selectedYoyakuTime = totalSelectedTime;
 
             fetchAvailability(currentDate);
+            updateDisplayInfo();
         }
 
         function selectDate(cell) {
@@ -1202,7 +1375,13 @@
             }
 
             if (!formData.yoyakuCount) {
-                alert('メニューを入力してください。');
+                alert('メニューを選択してください。');
+                return;
+            }
+
+            // 「その他」選択時に自由記載が空の場合のチェック
+            if (formData.yoyakuCount === 'その他' && !document.getElementById('otherMenuText').value.trim()) {
+                alert('「その他」の内容をご記入ください。');
                 return;
             }
 
@@ -1228,7 +1407,7 @@ ${formData.phone}
 ${formData.visitCount}
 
 📋 メニュー：
-${Array.isArray(formData.yoyakuCount) ? formData.yoyakuCount.map(m => '・' + m).join('\\n') : '・' + formData.yoyakuCount}
+・${formData.yoyakuCount}${formData.yoyakuCount === 'その他' ? '\n　' + document.getElementById('otherMenuText').value.trim() : ''}
 
 📅 ご希望日時：
 ① ${formData.dates[0] ? formatDate(formData.dates[0]) : 'なし'}
